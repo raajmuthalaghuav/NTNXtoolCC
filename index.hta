@@ -1,0 +1,78 @@
+
+<!DOCTYPE html><html><head><style>
+.header h1 {
+    display: block;
+    margin-top: 0.67em;
+    margin-bottom: 0em;
+    margin-left: 0;
+    margin-right: 0;
+    text-align:center;
+    font-size:40px;
+    background-color: #3BB9FF;
+  }
+
+  .content .pe, .pc, .buttons {
+    display: block;
+    margin-top: .1em;
+    margin-bottom: .1em;
+    margin-left: 20em;
+    margin-right: 20em;
+    text-align:center;
+    box-sizing: border-box;
+    border: 1px solid grey;
+    
+  }
+ </style>
+ <script type="text/javascript">
+ function myFunction(pe_ip, pe_username, pe_password, pc_ip, pc_username, pc_password, include_pc){
+     if (include_pc == true) 
+        var cmd  = "NTNXtoolCC.bat " + pe_ip + " " + pe_username + " " + pe_password + " CENTRAL " + pc_ip + " " + pc_username + " " + pc_password + " NTNX";
+    else
+        var cmd  = "NTNXtoolCC.exe " + pe_ip + " " + pe_username + " " + pe_password + " n  NTNX";
+
+//    alert(cmd);
+
+    WshShell = new ActiveXObject("Wscript.Shell"); //Create WScript Object
+    WshShell.run(cmd); // Please change the path and file name with your relevant available path 
+ }
+ </script>
+ 
+</head><body>
+ 
+
+<!-- .........................Webpage Starts here..............    -->
+<div class="header">
+    <h1>Nutanix Tool</h1>
+    <p style="text-align:center;font-size:11px">Note: This tool is used to generate reports for Prism Element. Developed by : <a href="http://www.citiuscloud.com/" target="_blank" rel="noopener noreferrer">CitiusCloud</a> </p>
+</div>
+<form action="generatexls" method="GET">
+<div class="content">
+    <div class="pe"><br>
+      <label >PE IP Address  : </label>
+      <input type="text" name="pe_ip" autofocus/><br><br>
+      <label>PE Username     : </label>
+      <input type="text" name="pe_username"/><br><br>
+      <label>PE Password     : </label>
+      <input type="password" name="pe_password" /><br><br>
+    </div>
+
+    <p style="padding-left: 20em;">
+        <input type="checkbox" name="include_pc"><label for="include_pc">Include Prism Central Metrix in Report</label>
+    </p>
+
+    <div class="pc"><br>
+        <label >PC IP Address  : </label>
+        <input type="text" name="pc_ip" ><br><br>
+        <label>PC Username     : </label>
+        <input type="text" name="pc_username" ><br><br>
+        <label>PC Password     : </label>
+        <input type="password" name="pc_password" ><br><br>
+    </div><br>
+    <div class="buttons"><br><span>
+        <INPUT TYPE=Button Name=btn Value="Submit" onClick="myFunction(document.getElementById('pe_ip').value, document.getElementById('pe_username').value, document.getElementById('pe_password').value, 
+        document.getElementById('pc_ip').value, document.getElementById('pc_username').value, document.getElementById('pc_password').value,
+        document.getElementById('include_pc').checked)"><br><br>
+    </div>
+</div>
+</form>
+</body></html>
